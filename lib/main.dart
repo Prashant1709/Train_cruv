@@ -37,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
     [44,45,46,48],[49,50,51,55],[52,53,54,56],[57,58,59,63],[60,61,62,64]
   ];
   bool seat=false;
+  int seatcol=0,seatrow=0;
   void berth_type(int s)
   {
     if (s > 0 && s < 73)
@@ -56,6 +57,18 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     else {
       Fluttertoast.showToast(msg: "Invalid seat number");
+    }
+    for(int i=0;i<16;i++){
+      for(int j=0;j<4;j++){
+        if(s==temp[i][j]){
+          print(i);
+          setState(() {
+            seatcol=i;
+            seat=true;
+            seatrow=j;
+          });
+        }
+      }
     }
   }
   final _textDeviceController = TextEditingController();
@@ -141,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(2.0),
-                                    child: Container(color: Color.fromRGBO(211, 233, 255, 1),
+                                    child: Container(color: (seat==true&&seatcol==index&&seatrow==0)?Colors.white:Color.fromRGBO(211, 233, 255, 1),
                                     height: 40,width: 40,
                                     child: Center(child: Column(
                                       children: [
@@ -152,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(2.0),
-                                    child: Container(color: Color.fromRGBO(211, 233, 255, 1),
+                                    child: Container(color: (seat==true&&seatcol==index&&seatrow==1)?Colors.white:Color.fromRGBO(211, 233, 255, 1),
                                       height: 40,width: 40,
                                       child: Center(child: Column(
                                         children: [
@@ -163,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(2.0),
-                                    child: Container(color: Color.fromRGBO(211, 233, 255, 1),
+                                    child: Container(color:(seat==true&&seatcol==index&&seatrow==2)?Colors.white:Color.fromRGBO(211, 233, 255, 1),
                                       height: 40,width: 40,
                                       child: Center(child: Column(
                                         children: [
@@ -181,7 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               color: Color.fromRGBO(145, 201, 255, 1),
                               child: Padding(
                                 padding: const EdgeInsets.all(2.0),
-                                child: Container(color: Color.fromRGBO(211, 233, 255, 1),
+                                child: Container(color: (seat==true&&seatcol==index&&seatrow==3)?Colors.white:Color.fromRGBO(211, 233, 255, 1),
                                   height: 45,width: 45,
                                   child: Center(child: Column(
                                     children: [
